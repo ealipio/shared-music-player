@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Spiritito",
+    "singer": "Spiritito",
+    "cover": "",
+    "musicSrc": "http://localhost:3003/music/Spiritito.mp3"
+  },
+  {
+    "name": "osoBlanco",
+    "singer": "osoBlanco",
+    "cover": "",
+    "musicSrc": "http://localhost:3003/music/osoBlanco.mp3"
+  },
+  {
+    "name": "fumeteo",
+    "singer": "fumeteo",
+    "cover": "",
+    "musicSrc": "http://localhost:3003/music/fumeteo.mp3"
+  }
+]

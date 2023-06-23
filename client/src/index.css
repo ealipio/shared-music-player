@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-jinke-music-player-mobile > .group {
+  display: flex;
+  justify-content: space-evenly;
+}
