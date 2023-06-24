@@ -1,6 +1,9 @@
-const express = require('express');
-const { createServer } = require('http');
-const { Server } = require('socket.io');
+import express from 'express';
+import cors from 'cors';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+
+import { client, songs, singleSong } from './controllers/song-controller';
 
 const app = express();
 const httpServer = createServer(app);
@@ -10,26 +13,21 @@ const PORT = process.env.PORT || 3003;
 
 const io = new Server(httpServer, OPTIONS);
 
-const socketHandlers = require('./socket/handlers');
+import { onConnection } from './socket/handlers';
 
 const wsNameSpace = io.of('/ws');
 wsNameSpace.on('connection', (socket) => {
-  socketHandlers.onConnection(io, socket);
+  onConnection(io, socket);
 });
-
-const cors = require('cors');
 
 // middleware
 app.use(cors());
 app.use(express.static('../client/dist'));
 
-// controllers
-const songController = require('./controllers/songController');
-
 // routes
-app.get('/', songController.client);
-app.get('/songs', songController.songs);
-app.get('/music/:name', songController.singleSong);
+app.get('/', client);
+app.get('/songs', songs);
+app.get('/music/:name', singleSong);
 
 // start server
 httpServer.listen(PORT, () => {

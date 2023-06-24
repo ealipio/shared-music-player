@@ -1,22 +1,23 @@
-const path = require('path');
-const ms = require('mediaserver');
+import path from 'path';
+import ms from 'mediaserver';
+import { Request, Response } from 'express';
 
-const { readFile } = require('../services/songService');
+import readFile from '../services/song-service';
 let playIndex = 1;
 
-exports.singleSong = (req, res) => {
+export const singleSong = (req: Request, res: Response) => {
   const SONGS_DIRECTORY = '../../music';
   const song = path.join(__dirname, SONGS_DIRECTORY, req.params.name);
   ms.pipe(req, res, song);
 };
 
-exports.client = (req, res) => {
+export const client = (_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
 };
 
-exports.songs = (_, res) => {
+export const songs = (_req: Request, res: Response) => {
   const pathToFile = path.join(__dirname, '../songs.json');
-  readFile(pathToFile, playIndex).then((audioList) => {
+  readFile(pathToFile).then((audioList) => {
     const response = {
       audioList,
       playIndex,

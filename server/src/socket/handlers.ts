@@ -11,7 +11,8 @@ function songActions(io, socket) {
   };
 
   const playIndex = (playIndex) => {
-    playIndexInServer = playIndex;
+    // @todo: fix passing the playIndexInServer
+    //playIndexInServer = playIndex;
     socket.broadcast.emit('server::audio::playIndex', playIndex);
   };
 
@@ -30,6 +31,6 @@ function songActions(io, socket) {
 //To broadcast to all connected clients from the server:
 //wsNameSpace.emit('from_server', data);
 
-exports.onConnection = (io, socket) => {
+export const onConnection = (io, socket) => {
   songActions(io, socket);
 };
